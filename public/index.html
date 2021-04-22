@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>PONG</title>
+</head>
+<body>
+  
+  <h1>Pong</h1>
+    <p>
+        <h2>Sélectionnez le nombre de bots pour jouer en local</h2>
+        <form method="GET" action="/partie">
+            <input type="number" id="joueur" name="nombreJoueur" min="1" max="4" value="1">
+            <input type="submit" value="Valider">
+        </form>
+    </p>
+
+    <p>
+      <h2>Sélectionnez le nombre de joueurs pour jouer en ligne </h2>
+      <form method="GET" action="/partie">
+          <input type="number" id="joueur" name="nombreJoueur" min="1" max="4" value="1">
+          <input type="submit" value="Valider">
+      </form>
+  </p>
+    
+</body>
+</html>
