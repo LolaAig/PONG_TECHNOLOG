@@ -4,10 +4,9 @@ import {applyConfig} from './config/express';
 let fs = require('fs');
 let async = require('async');
 
-let game = require('../public/js/game.js');
-
 let countPlayers = 0;
-let nbJoueurs = 0;
+let nbJoueurs = 2;
+let jeuEnAttente = false;
 
 const app: express.Application = express();
 applyConfig(app)
@@ -15,15 +14,8 @@ applyConfig(app)
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
 
-
 app.get('/',(req:any,res:any)=>{
     res.sendFile(path.join(__dirname,'..','public','index.html'));
-});
-
-
-app.get('/partie',(req:any,res:any)=>{
-    nbJoueurs = req.query.nombreJoueur;
-    res.sendFile(path.join(__dirname,'..','public','partie.html'));
 });
 
 app.get('/js/client.js',(req:any,res:any)=>{
@@ -43,30 +35,32 @@ let myDir = ['js','sound'];
 
 io.on('connection', (socket: any) => {
     console.log("Connecté");
-    countPlayers++;
-    console.log(countPlayers);
-    io.sockets.emit('Mettre à jour nb joueur', countPlayers);
-    console.log("Partie avec :  "+nbJoueurs+ " joueurs");
-    // lancer la partie
-    if(countPlayers == nbJoueurs) {
-        console.log("Lancer la partie");
-        socket.emit('Lancer la partie', countPlayers);
-        socket.on("game", (game:any) => {
-            console.log(game);
-        });
-    }
-    else {
-        console.log("En attente de joueurs");
-    }
 
     socket.on('disconnect', () => {
         countPlayers--;
         io.sockets.emit('Mettre à jour nb joueur', countPlayers);
     });
+
+    socket.on('Joueur a rejoint', () => {
+        jeuEnAttente = true;
+        countPlayers++;
+        socket.emit('Rejoindre partie', countPlayers);
+        io.sockets.emit('Mettre à jour nb joueur', countPlayers);
+
+        if(countPlayers == nbJoueurs) {
+            console.log("Lancer la partie");
+            io.sockets.emit('Lancer la partie', countPlayers);
+
+            socket.on("game", (game:any) => {
+                console.log(game);
+            });
+        }
+    });
+
+    socket.on('Update position', (joueur:any) => {
+        io.sockets.emit('Send position', joueur);
+    });
 });
-
-
-
 
 
 http.listen(3011,()=>{

@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LolaAig/PONG_GAME.git"
+    "url": "git+https://github.com/LolaAig/PONG_TECHNOLOG.git"
   },
   "author": "Lola Aigueperse",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LolaAig/PONG_GAME/issues"
+    "url": "https://github.com/LolaAig/PONG_TECHNOLOG/issues"
   },
-  "homepage": "https://github.com/LolaAig/PONG_GAME#readme",
+  "homepage": "https://github.com/LolaAig/PONG_TECHNOLOG#readme",
   "dependencies": {
     "@types/express": "^4.17.11",
     "async": "^3.2.0",

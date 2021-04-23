@@ -8,9 +8,9 @@ game.control = {
         game.control.controlSystem = "KEYBOARD";
         
             if ( event.keyCode == game.keycode.KEYDOWN ) { 
-                game.playerOne.goDown = true;
+                game.players[game.currentPlayer].goDown = true;
             } else if ( event.keyCode == game.keycode.KEYUP ) { 
-                game.playerOne.goUp = true;
+                game.players[game.currentPlayer].goUp = true;
             }
             if ( event.keyCode == game.keycode.SPACEBAR ) { 
                 game.ball.inGame = true;
@@ -21,9 +21,9 @@ game.control = {
     onKeyUp : function(event) {
       game.control.controlSystem = "KEYBOARD";
       if ( event.keyCode == game.keycode.KEYDOWN ) {
-        game.playerOne.goDown = false;
+        game.players[game.currentPlayer].goDown = false;
       } else if ( event.keyCode == game.keycode.KEYUP ) {
-        game.playerOne.goUp = false;
+        game.players[game.currentPlayer].goUp = false;
       }
 
       if ( event.keyCode == game.keycode.SPACEBAR ) { 
@@ -39,15 +39,15 @@ game.control = {
             game.control.mousePointer = event.clientY;
             }
         
-            if ( (game.control.mousePointer > game.playerOne.posY) && (game.groundHeight > game.playerOne.posY+game.playerOne.height)) {
-            game.playerOne.goDown = true;
-            game.playerOne.goUp = false;
-            } else if ( game.control.mousePointer < game.playerOne.posY ) {
-            game.playerOne.goDown = false;
-            game.playerOne.goUp = true;
+            if ( (game.control.mousePointer > game.players[game.currentPlayer].posY) && (game.groundHeight > game.players[game.currentPlayer].posY+game.players[game.currentPlayer].height)) {
+            game.players[game.currentPlayer].goDown = true;
+            game.players[game.currentPlayer].goUp = false;
+            } else if ( game.control.mousePointer < game.players[game.currentPlayer].posY ) {
+            game.players[game.currentPlayer].goDown = false;
+            game.players[game.currentPlayer].goUp = true;
             } else {
-            game.playerOne.goDown = false;
-            game.playerOne.goUp = false;
+            game.players[game.currentPlayer].goDown = false;
+            game.players[game.currentPlayer].goUp = false;
             }
         }
     

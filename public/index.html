@@ -2,26 +2,38 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>PONG</title>
+  <title>PONG GAME</title>
 </head>
 <body>
-  
-  <h1>Pong</h1>
-    <p>
-        <h2>Sélectionnez le nombre de bots pour jouer en local</h2>
-        <form method="GET" action="/partie">
-            <input type="number" id="joueur" name="nombreJoueur" min="1" max="4" value="1">
-            <input type="submit" value="Valider">
-        </form>
-    </p>
+    <div id="template"></div>
+    <script id="screen-form" type="text/template">
+        <p>
+            <form id="formBotsGame" method="GET" action="/nombreBots">
+                <input type="number" min="1" max="4" id="nbBots" name="nbBots" value="1" />
+                <input type="submit" value="Créer la partie" />
+            </form>
+        </p>
 
-    <p>
-      <h2>Sélectionnez le nombre de joueurs pour jouer en ligne </h2>
-      <form method="GET" action="/partie">
-          <input type="number" id="joueur" name="nombreJoueur" min="1" max="4" value="1">
-          <input type="submit" value="Valider">
-      </form>
-  </p>
-    
+        <p>
+            <form id="formRejoindre" method="GET" action="/rejoindre">
+                <input type="submit" value="Rejoindre la partie" />
+            </form>
+        </p>
+    </script>
+
+
+    <script id="screen-game" type="text/template">   
+        <h1>Partie</h1>
+        <div id="nbJoueur" style="margin-top:380px;margin-left:20px;font-size:20px;"></div> 
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/client.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/game.ai.js"></script>
+    <script type="text/javascript" src="js/game.control.js"></script>
+    <script type="text/javascript" src="js/game.display.js"></script>
+    <script type="text/javascript" src="js/game.keycode.js"></script>
 </body>
 </html>
